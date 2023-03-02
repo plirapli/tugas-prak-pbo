@@ -19,7 +19,8 @@ public class Balok_dan_Tabung {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		try (Scanner menuScanner = new Scanner(System.in)) {
+		try (Scanner menuSc = new Scanner(System.in)) {
+			Scanner hitungSc = new Scanner(System.in);
 			int inputMenu;
 
 			do {
@@ -28,80 +29,79 @@ public class Balok_dan_Tabung {
 				System.out.println("----------");
 				System.out.println("[1] Hitung Balok ");
 				System.out.println("[2] Hitung Tabung");
-				System.out.println("[0] Exit");
+				System.out.println("[Lainnya] Exit");
 				System.out.print("Pilih > ");
-				inputMenu = menuScanner.nextInt();
+				inputMenu = menuSc.nextInt();
 
 				switch (inputMenu) {
 					case 1:
-						inputBalok();
+						inputBalok(hitungSc);
 						break;
 
 					case 2:
-						inputTabung();
+						inputTabung(hitungSc);
+						break;
+
+					case 0:
 						break;
 
 					default:
-						System.out.println("Menu tidak tersedia. \n");
+						System.out.println("Menu tidak tersedia.");
 						break;
 				}
 
 				if (inputMenu != 0) {
-					System.out.println("Ulangi? (Ya: 1, Tidak: 0) > ");
-					inputMenu = menuScanner.nextInt();
+					System.out.print("\nUlangi? (Ya: 1, Tidak: 0) > ");
+					inputMenu = menuSc.nextInt();
 				}
 			} while (inputMenu != 0);
 		}
+		System.out.println("Terima kasih.");
 	}
 
-	public static void inputBalok() {
-		try (Scanner hitung = new Scanner(System.in)) {
-			double p, l, t;
+	public static void inputBalok(Scanner hitungSc) {
+		double p, l, t;
 
-			// Input
-			System.out.println("----------------");
-			System.out.println("Menghitung Balok");
-			System.out.println("----------------");
+		// Input
+		System.out.println("----------------");
+		System.out.println("Menghitung Balok");
+		System.out.println("----------------");
 
-			System.out.print("Input Panjang > ");
-			p = hitung.nextInt();
+		System.out.print("Input Panjang > ");
+		p = hitungSc.nextDouble();
 
-			System.out.print("Input Lebar > ");
-			l = hitung.nextInt();
+		System.out.print("Input Lebar > ");
+		l = hitungSc.nextDouble();
 
-			System.out.print("Input Tinggi > ");
-			t = hitung.nextInt();
+		System.out.print("Input Tinggi > ");
+		t = hitungSc.nextDouble();
 
-			hitungHasil(p, l, t);
-		}
+		hitungHasil(p, l, t);
 	}
 
-	public static void inputTabung() {
-		try (Scanner hitung = new Scanner(System.in)) {
-			double r, t;
+	public static void inputTabung(Scanner hitungSc) {
+		double r, t;
 
-			// Input
-			System.out.println("----------------");
-			System.out.println("Menghitung Tabung");
-			System.out.println("----------------");
+		// Input
+		System.out.println("----------------");
+		System.out.println("Menghitung Tabung");
+		System.out.println("----------------");
 
-			System.out.print("Input Jari-jari > ");
-			r = hitung.nextDouble();
+		System.out.print("Input Jari-jari > ");
+		r = hitungSc.nextDouble();
 
-			System.out.print("Input Tinggi > ");
-			t = hitung.nextInt();
+		System.out.print("Input Tinggi > ");
+		t = hitungSc.nextDouble();
 
-			hitungHasil(r, t);
-		}
-
+		hitungHasil(r, t);
 	}
 
 	public static void hitungHasil(double p, double l, double t) {
 		Balok balok = new Balok(p, l, t);
 
 		// Hasil
-		System.out.println("------");
-		System.out.println("\nHasil");
+		System.out.println("\n------");
+		System.out.println("Hasil");
 		System.out.println("------");
 
 		System.out.println("Luas Persegi Panjang: " + balok.luas());
@@ -115,11 +115,10 @@ public class Balok_dan_Tabung {
 		Tabung tabung = new Tabung(r, t);
 
 		// Hasil
-		System.out.println("------");
-		System.out.println("\nHasil");
+		System.out.println("\n------");
+		System.out.println("Hasil");
 		System.out.println("------");
 
-		System.out.println("_________OUTPUT_________");
 		System.out.println("Luas Lingkaran: " + tabung.luas());
 		System.out.println("Keliling Lingkaran: " + tabung.keliling());
 		System.out.println("Volume Tabung: " + tabung.volume());
