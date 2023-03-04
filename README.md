@@ -1,4 +1,3 @@
 # tugas-prak-pbo
 
-Nama: Muhammad Rafli
-NIM: 123210078
+Muhammad Rafli / 123210078
