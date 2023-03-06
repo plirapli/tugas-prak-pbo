@@ -29,7 +29,7 @@ public class Balok_dan_Tabung {
 				System.out.println("----------");
 				System.out.println("[1] Hitung Balok ");
 				System.out.println("[2] Hitung Tabung");
-				System.out.println("[Lainnya] Exit");
+				System.out.println("[0] Exit");
 				System.out.print("Pilih > ");
 				inputMenu = menuSc.nextInt();
 
