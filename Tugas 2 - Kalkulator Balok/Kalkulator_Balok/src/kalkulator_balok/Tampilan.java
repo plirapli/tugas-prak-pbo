@@ -6,8 +6,6 @@ package kalkulator_balok;
 
 import bangun_ruang.Balok;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -39,10 +37,8 @@ public class Tampilan extends JFrame implements ActionListener {
 
     labelPanjang = new JLabel("Panjang");
     inputPanjang = new JTextField("0", 7);
-
     labelLebar = new JLabel("Lebar");
     inputLebar = new JTextField("0", 7);
-
     labelTinggi = new JLabel("Tinggi");
     inputTinggi = new JTextField("0", 7);
 
@@ -67,18 +63,18 @@ public class Tampilan extends JFrame implements ActionListener {
     panelMain.add(labelTitle, "North");
     panelMain.add(panelTengah, "Center");
     panelMain.add(panelTombol, "South");
-    
+
     panelTengah.add(panelInput);
     panelTengah.add(labelHasil);
     panelTengah.add(panelJawaban);
-    
+
     panelInput.add(labelPanjang);
     panelInput.add(inputPanjang);
     panelInput.add(labelLebar);
     panelInput.add(inputLebar);
     panelInput.add(labelTinggi);
     panelInput.add(inputTinggi);
-    
+
     panelJawaban.add(labelHasil);
     labelHasil.setHorizontalAlignment(SwingConstants.CENTER);
     panelJawaban.add(labelKeliling);
@@ -100,6 +96,7 @@ public class Tampilan extends JFrame implements ActionListener {
   }
 
   // Event handler
+  @Override
   public void actionPerformed(ActionEvent event) {
     double panjang, lebar, tinggi;
     String textInputPanjang = inputPanjang.getText();
@@ -107,27 +104,22 @@ public class Tampilan extends JFrame implements ActionListener {
     String textInputTinggi = inputTinggi.getText();
 
     if (event.getSource() == btnHitung) {
-      if (textInputPanjang.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Panjang cannot empty");
-      } else if (textInputLebar.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Lebar cannot empty");
-      } else if (textInputTinggi.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Tinggi cannot empty");
-      } else {
-        try {
-          panjang = Double.parseDouble(textInputPanjang);
-          lebar = Double.parseDouble(textInputLebar);
-          tinggi = Double.parseDouble(textInputTinggi);
-
-          Balok balok = new Balok(panjang, lebar, tinggi);
-
-          labelKeliling.setText("Keliling Persegi: " + balok.keliling());
-          labelLuas.setText("Luas Persegi: " + balok.luas());
-          labelLuasPermukaan.setText("Luas Permukaan Balok: " + balok.luasPermukaan());
-          labelVolume.setText("Volume Balok: " + balok.volume());
-        } catch (NumberFormatException error) {
-          JOptionPane.showMessageDialog(this, error.getMessage());
-        }
+      try {
+        // Convert hasil inputan ke double
+        panjang = Double.parseDouble(textInputPanjang);
+        lebar = Double.parseDouble(textInputLebar);
+        tinggi = Double.parseDouble(textInputTinggi);
+        
+        // Bikin objek balok based on the input
+        Balok balok = new Balok(panjang, lebar, tinggi);
+        
+        // Namoilin hasil hitungan
+        labelKeliling.setText("Keliling Persegi: " + balok.keliling());
+        labelLuas.setText("Luas Persegi: " + balok.luas());
+        labelLuasPermukaan.setText("Luas Permukaan Balok: " + balok.luasPermukaan());
+        labelVolume.setText("Volume Balok: " + balok.volume());
+      } catch (Exception error) {
+        JOptionPane.showMessageDialog(this, error.getMessage());
       }
     }
 
@@ -137,7 +129,7 @@ public class Tampilan extends JFrame implements ActionListener {
       labelLuas.setText(" ");
       labelLuasPermukaan.setText(" ");
       labelVolume.setText(" ");
-      
+
       // Reset input
       inputPanjang.setText("0");
       inputLebar.setText("0");
